@@ -1,0 +1,525 @@
+:root {
+  /* --------------------------------------------------------------------
+   * Kalaa Design System Tokens
+   * ------------------------------------------------------------------ */
+
+  /* The signature sage frame */
+  --page: #7fa99b;
+
+  /* The sheet the site is printed on (subtle off-white, never pure white) */
+  --sheet: #f4f7f5;
+  --surface: #ffffff;
+  --frame-inner: #bfccc7;
+
+  /* Typography Colors */
+  --ink: #14131a;
+  --ink-body: #33313d;
+  --ink-muted: #56545f;
+  --ink-sage: #4e6f62;
+  --line: #e6e4ee;
+
+  /* The loud accent colour (butter) */
+  --accent: #ffd84d;
+  --on-accent: #14131a;
+
+  /* The action black buttons */
+  --action: #14131a;
+  --action-hover: #2f2d38;
+  --on-action: #ffffff;
+
+  /* Soft card tints */
+  --tint-butter: #fff2c2;
+  --tint-peach: #ffe2d0;
+  --tint-sage: #dcebe5;
+  --tint-cloud: #f1f0f4;
+  --tint-mist: #eff1ec;
+  --tint-violet: #eee8ff;
+  --tint-sky: #e3edfa;
+  --board: #f3f0e9;
+  --tape: #d9cdb4;
+
+  /* Category colors adapted to Kalaa palette */
+  --cat-sales: #047857;
+  --cat-sales-bg: var(--tint-sage);
+  --cat-sales-border: #a3c0bd;
+
+  --cat-support: #0369a1;
+  --cat-support-bg: var(--tint-sky);
+  --cat-support-border: #b8d4f7;
+
+  --cat-billing: #b45309;
+  --cat-billing-bg: var(--tint-butter);
+  --cat-billing-border: #f5d475;
+
+  --cat-technical: #4338ca;
+  --cat-technical-bg: var(--tint-violet);
+  --cat-technical-border: #c4b5fd;
+
+  --cat-other: #475569;
+  --cat-other-bg: var(--tint-cloud);
+  --cat-other-border: #cbd5e1;
+
+  /* Priority Badges */
+  --priority-urgent: #991b1b;
+  --priority-urgent-bg: #fee2e2;
+  --priority-urgent-border: #fca5a5;
+
+  --priority-high: #c2410c;
+  --priority-high-bg: var(--tint-peach);
+  --priority-high-border: #fdba74;
+
+  --priority-medium: #1d4ed8;
+  --priority-medium-bg: var(--tint-sky);
+  --priority-medium-border: #93c5fd;
+
+  --priority-low: #475569;
+  --priority-low-bg: var(--tint-cloud);
+  --priority-low-border: #cbd5e1;
+
+  /* Corner Arithmetic (One 10px token decides all curves) */
+  --radius: 0.625rem; /* 10px */
+  --radius-badge: calc(var(--radius) * 0.8);
+  --frame-line: 0.375rem;
+  --ring: 0.5rem;
+  --frame-line-radius: calc(var(--radius) + var(--frame-line));
+  --frame-radius: calc(var(--radius) + var(--frame-line) + var(--ring));
+
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-hand: 'Kalam', cursive;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Shadows */
+  --shadow-soft: 0 8px 24px -10px rgba(20, 19, 26, 0.12);
+  --shadow-hover: 0 4px 12px -2px rgba(20, 19, 26, 0.14);
+  --shadow-lift: 0 16px 36px -12px rgba(20, 19, 26, 0.18);
+  --shadow-xs: 0 1px 2px rgba(20, 19, 26, 0.06);
+  --shadow-sm: 0 2px 6px rgba(20, 19, 26, 0.08);
+  --shadow-xl: 0 20px 40px -15px rgba(20, 19, 26, 0.2);
+
+  /* Compatibility Aliases for all components */
+  --text-primary: var(--ink);
+  --text-secondary: #33313d;
+  --text-muted: #64748b;
+  --border-subtle: #cbd5e1;
+  --border-medium: #94a3b8;
+  --border-strong: #475569;
+  --bg-card: #ffffff;
+  --accent-brand: var(--action);
+  --accent-brand-hover: var(--action-hover);
+
+  --dur-base: 200ms;
+  --ease-brand: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--page);
+  color: var(--ink-body);
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  zoom: 0.9;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: all var(--dur-base) var(--ease-brand);
+}
+
+textarea, input, select {
+  font-family: var(--font-body);
+}
+
+/* Kalaa Paper Card Utility & Legacy Alias */
+.kalaa-card,
+.glass-card {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  transition: transform var(--dur-base) var(--ease-brand), box-shadow var(--dur-base) var(--ease-brand), border-color var(--dur-base) var(--ease-brand);
+}
+
+.kalaa-card:hover,
+.glass-card:hover {
+  box-shadow: var(--shadow-hover);
+  border-color: #94a3b8;
+}
+
+/* Crisp Action Button Utilities */
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius);
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(20, 19, 26, 0.05);
+  transition: all var(--dur-base) var(--ease-brand);
+}
+
+.btn-pill:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: #94a3b8;
+  transform: translateY(-1px);
+}
+
+.btn-pill:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Kalaa Butter Marker Highlight */
+.marker-highlight {
+  background-color: var(--accent);
+  color: var(--on-accent);
+  padding: 1px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  transform: rotate(-0.5deg);
+  box-shadow: 0 1px 3px rgba(20, 19, 26, 0.08);
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: var(--radius);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.badge-sales { 
+  background: var(--cat-sales-bg); 
+  color: var(--cat-sales); 
+  border: 1px solid var(--cat-sales-border); 
+}
+.badge-support { 
+  background: var(--cat-support-bg); 
+  color: var(--cat-support); 
+  border: 1px solid var(--cat-support-border); 
+}
+.badge-billing { 
+  background: var(--cat-billing-bg); 
+  color: var(--cat-billing); 
+  border: 1px solid var(--cat-billing-border); 
+}
+.badge-technical { 
+  background: var(--cat-technical-bg); 
+  color: var(--cat-technical); 
+  border: 1px solid var(--cat-technical-border); 
+}
+.badge-other { 
+  background: var(--cat-other-bg); 
+  color: var(--cat-other); 
+  border: 1px solid var(--cat-other-border); 
+}
+
+/* Priority Badges */
+.badge-urgent {
+  background: var(--priority-urgent-bg);
+  color: var(--priority-urgent);
+  border: 1px solid var(--priority-urgent-border);
+  font-weight: 800;
+}
+.badge-high { 
+  background: var(--priority-high-bg); 
+  color: var(--priority-high); 
+  border: 1px solid var(--priority-high-border); 
+}
+.badge-medium { 
+  background: var(--priority-medium-bg); 
+  color: var(--priority-medium); 
+  border: 1px solid var(--priority-medium-border); 
+}
+.badge-low { 
+  background: var(--priority-low-bg); 
+  color: var(--priority-low); 
+  border: 1px solid var(--priority-low-border); 
+}
+
+/* Subtle spinner */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  animation: spin 0.8s linear infinite;
+}
+
+/* ====================================================================
+ * Animations & Micro-Interactions
+ * ================================================================== */
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pulseDot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.82);
+  }
+}
+
+@keyframes urgentGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(239, 68, 68, 0.1);
+  }
+}
+
+@keyframes tableRowFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.86);
+    opacity: 0.5;
+  }
+  65% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Core Animation Utility Classes */
+.table-stagger-row {
+  animation: tableRowFade 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.table-stagger-row:nth-child(1) { animation-delay: 0.035s; }
+.table-stagger-row:nth-child(2) { animation-delay: 0.070s; }
+.table-stagger-row:nth-child(3) { animation-delay: 0.105s; }
+.table-stagger-row:nth-child(4) { animation-delay: 0.140s; }
+.table-stagger-row:nth-child(5) { animation-delay: 0.175s; }
+.table-stagger-row:nth-child(6) { animation-delay: 0.210s; }
+.table-stagger-row:nth-child(7) { animation-delay: 0.245s; }
+.table-stagger-row:nth-child(8) { animation-delay: 0.280s; }
+.table-stagger-row:nth-child(9) { animation-delay: 0.315s; }
+.table-stagger-row:nth-child(10) { animation-delay: 0.350s; }
+.table-stagger-row:nth-child(n+11) { animation-delay: 0.385s; }
+
+.animate-pop {
+  animation: popIn 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.animate-page {
+  animation: pageFadeIn 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-card {
+  animation: cardEntrance 0.46s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.pulse-dot {
+  animation: pulseDot 2.8s ease-in-out infinite;
+}
+
+.urgent-pulse {
+  animation: urgentGlow 3s ease-in-out infinite;
+}
+
+/* Tactile & Interactive Elements */
+.btn-tactile {
+  transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.24s ease, background-color 0.24s ease, border-color 0.24s ease;
+}
+.btn-tactile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(20, 19, 26, 0.08);
+}
+.btn-tactile:active {
+  transform: scale(0.95) !important;
+  transition-duration: 0.12s;
+}
+
+/* Pagination Specific Animated Controls */
+.pagination-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 32px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #334155;
+  box-shadow: 0 1px 2px rgba(20, 19, 26, 0.04);
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  user-select: none;
+}
+.pagination-btn:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: #94a3b8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(20, 19, 26, 0.08);
+}
+.pagination-btn:active:not(:disabled) {
+  transform: scale(0.92) !important;
+  transition-duration: 0.12s;
+}
+.pagination-btn.active {
+  background: var(--action);
+  border-color: var(--action);
+  color: #ffffff;
+  box-shadow: 0 4px 14px -2px rgba(20, 19, 26, 0.25);
+  animation: popIn 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.pagination-btn.active:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  transform: translateY(-2px) scale(1.05);
+}
+
+.pagination-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 13px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #1e293b;
+  box-shadow: 0 1px 2px rgba(20, 19, 26, 0.04);
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  user-select: none;
+}
+.pagination-nav-btn:hover:not(:disabled) {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 12px rgba(20, 19, 26, 0.08);
+}
+.pagination-nav-btn:hover:not(:disabled) .nav-icon-prev {
+  transform: translateX(-3px);
+}
+.pagination-nav-btn:hover:not(:disabled) .nav-icon-next {
+  transform: translateX(3px);
+}
+.pagination-nav-btn:active:not(:disabled) {
+  transform: scale(0.93) !important;
+  transition-duration: 0.12s;
+}
+.pagination-nav-btn:disabled {
+  background: #f8fafc;
+  color: #94a3b8;
+  border-color: #e2e8f0;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.nav-icon-prev, .nav-icon-next {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Interactive Card & Column Transitions */
+.interactive-card {
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease, border-color 0.28s ease;
+}
+.interactive-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px -4px rgba(20, 19, 26, 0.1);
+  border-color: #94a3b8;
+}
+.interactive-card:active {
+  transform: scale(0.98);
+  transition-duration: 0.12s;
+}
+
+/* Custom Kalaa Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: var(--sheet);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--frame-inner);
+  border-radius: var(--radius);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--page);
+}
