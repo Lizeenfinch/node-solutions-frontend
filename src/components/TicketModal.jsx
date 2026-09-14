@@ -169,6 +169,8 @@ export function TicketModal({ record, onClose }) {
         <div style={{
           padding: '24px 30px',
           overflowY: 'auto',
+          overscrollBehavior: 'contain',
+          WebkitOverflowScrolling: 'touch',
           display: 'grid',
           gridTemplateColumns: 'minmax(320px, 380px) 1fr',
           gap: '24px',
@@ -366,7 +368,8 @@ export function TicketModal({ record, onClose }) {
               maxHeight: '380px',
               minHeight: '260px',
               overflowY: 'auto',
-              scrollBehavior: 'smooth'
+              overscrollBehavior: 'contain',
+              WebkitOverflowScrolling: 'touch'
             }}>
               {record.draft_response || 'No draft response generated for this ticket.'}
             </div>
