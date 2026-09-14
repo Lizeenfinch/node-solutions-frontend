@@ -8,7 +8,8 @@ import {
   MessageSquare, 
   RotateCcw, 
   Download, 
-  AlertTriangle 
+  AlertTriangle,
+  Zap
 } from 'lucide-react';
 import { submitTriage } from '../services/api.js';
 import { HandAccent } from '../components/HandAccent';
