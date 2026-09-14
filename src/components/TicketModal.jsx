@@ -50,29 +50,27 @@ export function TicketModal({ record, onClose }) {
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'rgba(255, 255, 255, 0.65)', // Completely bright frosted glass, zero black
-        backdropFilter: 'blur(8px)',
-        WebkitBackdropFilter: 'blur(8px)',
+        backgroundColor: 'rgba(15, 23, 42, 0.25)', // Clean, crisp overlay with ZERO blur
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: 1000,
         padding: '28px',
-        animation: 'backdropFadeIn 0.2s ease-out'
+        animation: 'backdropFadeIn 0.15s ease-out'
       }}
     >
       <div 
         onClick={(e) => e.stopPropagation()}
         style={{
-          maxWidth: '1080px', // Bigger, spacious width
+          maxWidth: '1080px',
           width: '94%',
           maxHeight: '92vh',
           display: 'flex',
           flexDirection: 'column',
           background: '#ffffff',
-          borderRadius: '1.25rem', // 20px
-          boxShadow: '0 25px 50px -12px rgba(15, 23, 42, 0.18), 0 0 0 1px rgba(15, 23, 42, 0.08)',
-          border: '1px solid #e2e8f0',
+          borderRadius: '1.25rem',
+          boxShadow: '0 12px 32px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06)',
+          border: '1px solid #cbd5e1',
           overflow: 'hidden',
           animation: 'modalScaleIn 0.22s cubic-bezier(0.16, 1, 0.3, 1)'
         }}
