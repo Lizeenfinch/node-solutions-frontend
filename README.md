@@ -37,14 +37,3 @@ The application will be live at `http://localhost:3000`.
 ```bash
 npm run build
 ```
-
----
-
-## Deploying to Vercel
-
-1. Push this repository to GitHub.
-2. In [Vercel](https://vercel.com/new), import this repository.
-3. Framework Preset: **Vite**.
-4. Set Environment Variable:
-   - `VITE_API_BASE_URL`: `https://<your-node-backend>.vercel.app`
-5. Click **Deploy**. SPA route rewrites are pre-configured in [`vercel.json`](file:///e:/Node%20Solutions/node-frontend/vercel.json).
