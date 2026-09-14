@@ -4,12 +4,10 @@ import {
   Copy, 
   Check, 
   Mail, 
-  AlertCircle, 
   Building2, 
   Clock, 
   Sparkles,
-  CheckCircle2,
-  Share2
+  CheckCircle2
 } from 'lucide-react';
 
 export function TicketModal({ record, onClose }) {
@@ -52,51 +50,53 @@ export function TicketModal({ record, onClose }) {
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'rgba(20, 19, 26, 0.25)',
-        backdropFilter: 'blur(10px)',
-        WebkitBackdropFilter: 'blur(10px)',
+        backgroundColor: 'rgba(0, 0, 0, 0.45)',
+        backdropFilter: 'blur(4px)',
+        WebkitBackdropFilter: 'blur(4px)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: 1000,
-        padding: '24px'
+        padding: '24px',
+        animation: 'backdropFadeIn 0.2s ease-out'
       }}
     >
       <div 
         onClick={(e) => e.stopPropagation()}
         style={{
-          maxWidth: '980px',
-          width: '95%',
+          maxWidth: '768px', // max-w-3xl
+          width: '100%',
           maxHeight: '90vh',
           display: 'flex',
           flexDirection: 'column',
           background: '#ffffff',
-          borderRadius: '16px',
-          boxShadow: '0 25px 60px -15px rgba(20, 19, 26, 0.18), 0 0 0 1px rgba(20, 19, 26, 0.08)',
-          border: '1px solid var(--border-subtle, #cbd5e1)',
+          borderRadius: '1rem', // rounded-2xl
+          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)', // shadow-2xl
+          border: '1px solid #e5e7eb', // border-gray-200
           overflow: 'hidden',
-          animation: 'modalIn 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
+          animation: 'modalScaleIn 0.22s cubic-bezier(0.16, 1, 0.3, 1)'
         }}
       >
-        {/* Top Header Bar */}
+        {/* Header Bar */}
         <div style={{
-          padding: '20px 28px 16px 28px',
-          borderBottom: '1px solid var(--line, #e6e4ee)',
-          background: 'var(--sheet, #f4f7f5)',
+          padding: '20px 24px 16px 24px',
+          borderBottom: '1px solid #e5e7eb',
+          background: '#f9fafb',
           display: 'flex',
           alignItems: 'flex-start',
           justifyContent: 'space-between',
-          gap: '20px'
+          gap: '16px'
         }}>
           <div style={{ flex: 1 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px', flexWrap: 'wrap' }}>
+            {/* Metadata Pills */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', flexWrap: 'wrap' }}>
               <span style={{
                 fontFamily: 'var(--font-mono, monospace)',
                 fontSize: '0.74rem',
                 fontWeight: 800,
-                color: 'var(--ink-sage, #4e6f62)',
+                color: '#4b5563',
                 background: '#ffffff',
-                border: '1px solid var(--border-subtle, #cbd5e1)',
+                border: '1px solid #e5e7eb',
                 padding: '2px 8px',
                 borderRadius: '6px',
                 letterSpacing: '0.04em'
@@ -111,7 +111,7 @@ export function TicketModal({ record, onClose }) {
               </span>
               <span style={{
                 fontSize: '0.72rem',
-                color: 'var(--ink-muted, #56545f)',
+                color: '#6b7280',
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '4px',
@@ -123,10 +123,10 @@ export function TicketModal({ record, onClose }) {
             </div>
 
             <h2 style={{
-              fontSize: '1.25rem',
+              fontSize: '1.22rem',
               fontWeight: 800,
-              color: 'var(--ink, #14131a)',
-              lineHeight: 1.3,
+              color: '#111827',
+              lineHeight: 1.35,
               margin: 0
             }}>
               {record.summary}
@@ -138,252 +138,240 @@ export function TicketModal({ record, onClose }) {
             onClick={onClose}
             aria-label="Close modal"
             style={{
-              width: '34px',
-              height: '34px',
+              width: '32px',
+              height: '32px',
               borderRadius: '50%',
               background: '#ffffff',
-              border: '1px solid var(--border-subtle, #cbd5e1)',
+              border: '1px solid #e5e7eb',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: 'var(--ink, #14131a)',
+              color: '#4b5563',
               cursor: 'pointer',
               flexShrink: 0,
-              boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
+              boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
               transition: 'all 0.15s ease'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#fee2e2';
-              e.currentTarget.style.borderColor = '#fca5a5';
-              e.currentTarget.style.color = '#991b1b';
+              e.currentTarget.style.backgroundColor = '#f3f4f6';
+              e.currentTarget.style.borderColor = '#d1d5db';
+              e.currentTarget.style.color = '#111827';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.backgroundColor = '#ffffff';
-              e.currentTarget.style.borderColor = 'var(--border-subtle, #cbd5e1)';
-              e.currentTarget.style.color = 'var(--ink, #14131a)';
+              e.currentTarget.style.borderColor = '#e5e7eb';
+              e.currentTarget.style.color = '#4b5563';
             }}
           >
-            <X size={16} strokeWidth={2.5} />
+            <X size={15} strokeWidth={2.5} />
           </button>
         </div>
 
-        {/* 2-Column Wide Layout Body */}
+        {/* Modal Body Container */}
         <div style={{
-          padding: '24px 28px',
+          padding: '22px 24px',
           overflowY: 'auto',
-          display: 'grid',
-          gridTemplateColumns: 'minmax(320px, 390px) 1fr',
-          gap: '22px',
-          alignItems: 'stretch'
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '16px'
         }}>
 
-          {/* Left Column: Context & Metadata */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-            
-            {/* Inbound Customer Message */}
+          {/* Original Inbound Message: Soft neutral light-gray background, NO colored side borders */}
+          <div style={{
+            background: '#f9fafb',
+            border: '1px solid #e5e7eb',
+            borderRadius: '10px',
+            padding: '14px 18px'
+          }}>
             <div style={{
-              background: 'var(--tint-cloud, #f1f0f4)',
-              borderLeft: '4px solid var(--accent, #ffd84d)',
-              borderRadius: '0 10px 10px 0',
-              padding: '14px 16px'
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              fontSize: '0.72rem',
+              fontWeight: 800,
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+              color: '#6b7280',
+              marginBottom: '6px'
             }}>
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                fontSize: '0.72rem',
-                fontWeight: 800,
-                textTransform: 'uppercase',
-                letterSpacing: '0.05em',
-                color: 'var(--ink-muted, #56545f)',
-                marginBottom: '6px'
-              }}>
-                <Mail size={13} strokeWidth={2.5} />
-                Original Inbound Message
-              </div>
-              <div style={{
-                fontSize: '0.88rem',
-                color: 'var(--ink-body, #33313d)',
-                lineHeight: 1.6,
-                fontStyle: 'italic',
-                whiteSpace: 'pre-wrap'
-              }}>
-                "{record.original_text}"
-              </div>
+              <Mail size={13} strokeWidth={2.5} />
+              Original Inbound Message
             </div>
-
-            {/* Classification Summary Grid */}
             <div style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: '10px'
+              fontSize: '0.88rem',
+              color: '#374151',
+              lineHeight: 1.6,
+              fontStyle: 'italic',
+              whiteSpace: 'pre-wrap'
             }}>
-              <div style={{
-                background: 'var(--sheet, #f4f7f5)',
-                border: '1px solid var(--border-subtle, #cbd5e1)',
-                borderRadius: '8px',
-                padding: '10px 12px'
-              }}>
-                <div style={{ fontSize: '0.66rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-muted, #64748b)', marginBottom: '3px' }}>
-                  Category
-                </div>
-                <div style={{ fontWeight: 700, fontSize: '0.86rem', color: 'var(--ink, #14131a)' }}>
-                  {record.category}
-                </div>
-              </div>
-
-              <div style={{
-                background: 'var(--sheet, #f4f7f5)',
-                border: '1px solid var(--border-subtle, #cbd5e1)',
-                borderRadius: '8px',
-                padding: '10px 12px'
-              }}>
-                <div style={{ fontSize: '0.66rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-muted, #64748b)', marginBottom: '3px' }}>
-                  Priority Level
-                </div>
-                <div style={{ fontWeight: 700, fontSize: '0.86rem', color: 'var(--ink, #14131a)' }}>
-                  {record.priority}
-                </div>
-              </div>
-
-              <div style={{
-                gridColumn: 'span 2',
-                background: 'var(--sheet, #f4f7f5)',
-                border: '1px solid var(--border-subtle, #cbd5e1)',
-                borderRadius: '8px',
-                padding: '10px 12px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between'
-              }}>
-                <span style={{ fontSize: '0.66rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-muted, #64748b)' }}>
-                  Assigned Team
-                </span>
-                <span style={{ fontWeight: 700, fontSize: '0.86rem', color: 'var(--ink, #14131a)', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
-                  <Building2 size={13} color="var(--ink-sage, #4e6f62)" />
-                  {record.assigned_to}
-                </span>
-              </div>
+              "{record.original_text}"
             </div>
-
-            {/* Priority Rationale Note */}
-            {record.priority_reason && (
-              <div style={{
-                background: 'var(--tint-butter, #fff2c2)',
-                border: '1px solid #f5d475',
-                borderRadius: '8px',
-                padding: '10px 12px',
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: '8px',
-                fontSize: '0.8rem'
-              }}>
-                <AlertCircle size={14} color="#b45309" style={{ flexShrink: 0, marginTop: '2px' }} />
-                <div>
-                  <strong style={{ color: '#92400e', fontWeight: 800 }}>Triage Rationale: </strong>
-                  <span style={{ color: '#78350f', lineHeight: 1.45 }}>{record.priority_reason}</span>
-                </div>
-              </div>
-            )}
           </div>
 
-          {/* Right Column: Full Draft Response Card (Spacious, Fully Visible) */}
+          {/* 3-Part Classification Strip */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '12px'
+          }}>
+            <div style={{
+              background: '#ffffff',
+              border: '1px solid #e5e7eb',
+              borderRadius: '8px',
+              padding: '10px 14px'
+            }}>
+              <div style={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', color: '#6b7280', marginBottom: '4px' }}>
+                Category
+              </div>
+              <div style={{ fontWeight: 700, fontSize: '0.88rem', color: '#111827' }}>
+                {record.category}
+              </div>
+            </div>
+
+            <div style={{
+              background: '#ffffff',
+              border: '1px solid #e5e7eb',
+              borderRadius: '8px',
+              padding: '10px 14px'
+            }}>
+              <div style={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', color: '#6b7280', marginBottom: '4px' }}>
+                Priority Level
+              </div>
+              <div style={{ fontWeight: 700, fontSize: '0.88rem', color: '#111827' }}>
+                {record.priority}
+              </div>
+            </div>
+
+            <div style={{
+              background: '#ffffff',
+              border: '1px solid #e5e7eb',
+              borderRadius: '8px',
+              padding: '10px 14px'
+            }}>
+              <div style={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', color: '#6b7280', marginBottom: '4px' }}>
+                Assigned Queue
+              </div>
+              <div style={{ fontWeight: 700, fontSize: '0.88rem', color: '#111827', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                <Building2 size={13} color="#4b5563" />
+                {record.assigned_to}
+              </div>
+            </div>
+          </div>
+
+          {/* Triage Rationale Callout: Soft neutral light-gray background, NO colored/yellow side border */}
+          {record.priority_reason && (
+            <div style={{
+              background: '#f9fafb',
+              border: '1px solid #e5e7eb',
+              borderRadius: '8px',
+              padding: '10px 16px',
+              fontSize: '0.82rem',
+              color: '#4b5563',
+              lineHeight: 1.5
+            }}>
+              <strong style={{ color: '#111827', fontWeight: 700 }}>Triage Rationale: </strong>
+              <span>{record.priority_reason}</span>
+            </div>
+          )}
+
+          {/* Drafted Response for Review — Scrollable Box with Fixed Header & Footer */}
           <div style={{
             background: '#ffffff',
-            border: '1.5px solid var(--border-subtle, #cbd5e1)',
-            borderRadius: '12px',
+            border: '1px solid #e5e7eb',
+            borderRadius: '10px',
+            overflow: 'hidden',
             display: 'flex',
             flexDirection: 'column',
-            boxShadow: '0 2px 10px rgba(20, 19, 26, 0.04)',
-            overflow: 'hidden'
+            boxShadow: '0 1px 3px rgba(0, 0, 0, 0.04)'
           }}>
-            {/* Header with Copy Action */}
+            {/* FIXED Header outside scroll */}
             <div style={{
-              padding: '12px 18px',
-              background: 'var(--sheet, #f4f7f5)',
-              borderBottom: '1px solid var(--line, #e6e4ee)',
+              padding: '10px 16px',
+              background: '#f9fafb',
+              borderBottom: '1px solid #e5e7eb',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
               gap: '12px'
             }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
-                <Sparkles size={15} color="var(--ink-sage, #4e6f62)" />
-                <span style={{ fontSize: '0.78rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--ink, #14131a)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Sparkles size={14} color="#6b7280" />
+                <span style={{ fontSize: '0.76rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', color: '#374151' }}>
                   Drafted Response for Review
                 </span>
               </div>
 
-              {/* Clean Pill Copy Button */}
+              {/* Fixed Copy Response Button */}
               <button
                 onClick={handleCopy}
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '6px',
-                  fontSize: '0.78rem',
+                  fontSize: '0.76rem',
                   fontWeight: 700,
-                  color: copied ? '#15803d' : 'var(--ink, #14131a)',
+                  color: copied ? '#15803d' : '#374151',
                   background: copied ? '#dcfce7' : '#ffffff',
-                  border: copied ? '1px solid #86efac' : '1px solid var(--border-subtle, #cbd5e1)',
-                  padding: '6px 14px',
-                  borderRadius: '7px',
+                  border: copied ? '1px solid #86efac' : '1px solid #d1d5db',
+                  padding: '5px 12px',
+                  borderRadius: '6px',
                   cursor: 'pointer',
                   boxShadow: '0 1px 2px rgba(0,0,0,0.04)',
                   transition: 'all 0.15s ease'
                 }}
                 onMouseEnter={(e) => {
                   if (!copied) {
-                    e.currentTarget.style.backgroundColor = 'var(--tint-sage, #dcebe5)';
-                    e.currentTarget.style.borderColor = '#a3c0bd';
+                    e.currentTarget.style.backgroundColor = '#f3f4f6';
+                    e.currentTarget.style.borderColor = '#9ca3af';
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (!copied) {
                     e.currentTarget.style.backgroundColor = '#ffffff';
-                    e.currentTarget.style.borderColor = 'var(--border-subtle, #cbd5e1)';
+                    e.currentTarget.style.borderColor = '#d1d5db';
                   }
                 }}
               >
                 {copied ? (
                   <>
-                    <CheckCircle2 size={14} color="#15803d" />
-                    Copied to Clipboard!
+                    <CheckCircle2 size={13} color="#15803d" />
+                    Copied!
                   </>
                 ) : (
                   <>
-                    <Copy size={14} />
+                    <Copy size={13} />
                     Copy Response
                   </>
                 )}
               </button>
             </div>
 
-            {/* Response Body with Line Breaks & Clear Text */}
+            {/* SCROLLABLE Response Body with fixed max-height */}
             <div style={{
-              padding: '20px 22px',
-              fontSize: '0.94rem',
-              color: 'var(--ink-body, #33313d)',
-              lineHeight: 1.75,
+              maxHeight: '260px',
+              overflowY: 'auto',
+              scrollBehavior: 'smooth',
+              padding: '16px 18px',
+              fontSize: '0.9rem',
+              color: '#1f2937',
+              lineHeight: 1.7,
               whiteSpace: 'pre-wrap',
               background: '#ffffff',
-              fontFamily: 'var(--font-body, sans-serif)',
-              flex: 1,
-              minHeight: '220px'
+              fontFamily: 'var(--font-body, sans-serif)'
             }}>
               {record.draft_response || 'No draft response generated for this ticket.'}
             </div>
 
-            {/* Metadata Footer */}
+            {/* FIXED Metadata Footer outside scroll */}
             <div style={{
-              padding: '10px 18px',
-              background: 'var(--sheet, #f4f7f5)',
-              borderTop: '1px solid var(--line, #e6e4ee)',
+              padding: '8px 16px',
+              background: '#f9fafb',
+              borderTop: '1px solid #f3f4f6',
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
               fontSize: '0.72rem',
-              color: 'var(--ink-muted, #56545f)'
+              color: '#6b7280'
             }}>
               <span>
                 {record._model ? `Engine: ${record._model}` : 'Deterministic Engine'}
@@ -396,11 +384,11 @@ export function TicketModal({ record, onClose }) {
 
         </div>
 
-        {/* Clean Light Footer Bar */}
+        {/* Modal Footer */}
         <div style={{
-          padding: '12px 28px',
-          borderTop: '1px solid var(--line, #e6e4ee)',
-          background: 'var(--sheet, #f4f7f5)',
+          padding: '12px 24px',
+          borderTop: '1px solid #e5e7eb',
+          background: '#f9fafb',
           display: 'flex',
           justifyContent: 'flex-end',
           alignItems: 'center'
@@ -408,18 +396,18 @@ export function TicketModal({ record, onClose }) {
           <button
             onClick={onClose}
             style={{
-              padding: '7px 22px',
-              borderRadius: '8px',
+              padding: '6px 20px',
+              borderRadius: '6px',
               fontSize: '0.82rem',
               fontWeight: 700,
-              color: 'var(--ink, #14131a)',
+              color: '#374151',
               background: '#ffffff',
-              border: '1px solid var(--border-subtle, #cbd5e1)',
+              border: '1px solid #d1d5db',
               cursor: 'pointer',
               transition: 'all 0.15s ease',
-              boxShadow: '0 1px 2px rgba(0,0,0,0.03)'
+              boxShadow: '0 1px 2px rgba(0,0,0,0.04)'
             }}
-            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#e8edf2'}
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#f3f4f6'}
             onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#ffffff'}
           >
             Close

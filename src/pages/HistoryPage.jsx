@@ -240,85 +240,87 @@ export default function HistoryPage({ records = [], onRefreshHistory }) {
                 </tr>
               </thead>
               <tbody key={`${safeCurrentPage}-${pageSize}-${categoryFilter}-${priorityFilter}-${ownerFilter}`}>
-                {paginatedRecords.map((item) => (
-                  <tr
-                    key={item.id}
-                    className="table-stagger-row"
-                    style={{ 
-                      borderBottom: '1px solid #f1f5f9', 
-                      transition: 'background 0.24s cubic-bezier(0.22, 1, 0.36, 1), transform 0.24s cubic-bezier(0.22, 1, 0.36, 1)'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = '#f8fafc';
-                      e.currentTarget.style.transform = 'scale(1.002)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = 'transparent';
-                      e.currentTarget.style.transform = 'none';
-                    }}
-                  >
-                    <td style={{ padding: '12px 18px', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: '#4f46e5', fontWeight: 600 }}>
-                      {item.id}
-                    </td>
-                    <td style={{ padding: '12px 18px', maxWidth: '340px' }}>
-                      <div style={{ fontWeight: 600, color: '#1e293b', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                        {item.summary}
-                      </div>
-                      <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                        {item.original_text}
-                      </div>
-                    </td>
-                    <td style={{ padding: '12px 18px' }}>
-                      <span className={`badge ${getCategoryClass(item.category)}`}>
-                        {item.category}
-                      </span>
-                    </td>
-                    <td style={{ padding: '12px 18px' }}>
-                      <span className={`badge ${getPriorityClass(item.priority)}`}>
-                        {item.priority}
-                      </span>
-                    </td>
-                    <td style={{ padding: '12px 18px', fontWeight: 600, color: '#334155' }}>
-                      {item.assigned_to}
-                    </td>
-                    <td style={{ padding: '12px 18px', color: 'var(--text-muted)', fontSize: '0.76rem', whiteSpace: 'nowrap' }}>
-                      {new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                    </td>
-                    <td style={{ padding: '12px 18px', textAlign: 'right' }}>
-                      <button
-                        onClick={() => setActiveRecordModal(item)}
-                        style={{
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: '6px',
-                          padding: '5px 13px',
-                          borderRadius: '7px',
-                          background: '#ffffff',
-                          border: '1px solid var(--border-subtle, #cbd5e1)',
-                          color: 'var(--ink, #14131a)',
-                          fontSize: '0.78rem',
-                          fontWeight: 700,
-                          cursor: 'pointer',
-                          boxShadow: '0 1px 2px rgba(20, 19, 26, 0.04)',
-                          transition: 'all 0.15s ease'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = 'var(--action, #14131a)';
-                          e.currentTarget.style.color = '#ffffff';
-                          e.currentTarget.style.borderColor = 'var(--action, #14131a)';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = '#ffffff';
-                          e.currentTarget.style.color = 'var(--ink, #14131a)';
-                          e.currentTarget.style.borderColor = 'var(--border-subtle, #cbd5e1)';
-                        }}
-                      >
-                        <Eye size={13} strokeWidth={2.5} />
-                        View Ticket
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                {paginatedRecords.map((item, index) => {
+                  const isEven = index % 2 === 0;
+                  return (
+                    <tr
+                      key={item.id}
+                      className="table-stagger-row"
+                      style={{ 
+                        background: isEven ? '#ffffff' : '#fafbfa',
+                        borderBottom: '1px solid #eef2f6', 
+                        transition: 'background 0.2s ease, transform 0.2s ease'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = '#f1f5f9';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = isEven ? '#ffffff' : '#fafbfa';
+                      }}
+                    >
+                      <td style={{ padding: '14px 18px', fontFamily: 'var(--font-mono)', fontSize: '0.76rem', color: '#4338ca', fontWeight: 700 }}>
+                        {item.id}
+                      </td>
+                      <td style={{ padding: '14px 18px', maxWidth: '340px' }}>
+                        <div style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.88rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', marginBottom: '2px' }}>
+                          {item.summary}
+                        </div>
+                        <div style={{ fontSize: '0.74rem', color: '#64748b', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                          {item.original_text}
+                        </div>
+                      </td>
+                      <td style={{ padding: '14px 18px' }}>
+                        <span className={`badge ${getCategoryClass(item.category)}`}>
+                          {item.category}
+                        </span>
+                      </td>
+                      <td style={{ padding: '14px 18px' }}>
+                        <span className={`badge ${getPriorityClass(item.priority)}`}>
+                          {item.priority}
+                        </span>
+                      </td>
+                      <td style={{ padding: '14px 18px', fontWeight: 600, color: '#334155', fontSize: '0.84rem' }}>
+                        {item.assigned_to}
+                      </td>
+                      <td style={{ padding: '14px 18px', color: '#64748b', fontSize: '0.76rem', whiteSpace: 'nowrap' }}>
+                        {new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      </td>
+                      <td style={{ padding: '14px 18px', textAlign: 'right' }}>
+                        <button
+                          onClick={() => setActiveRecordModal(item)}
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '6px',
+                            padding: '5px 13px',
+                            borderRadius: '7px',
+                            background: '#ffffff',
+                            border: '1px solid var(--border-subtle, #cbd5e1)',
+                            color: 'var(--ink, #14131a)',
+                            fontSize: '0.78rem',
+                            fontWeight: 700,
+                            cursor: 'pointer',
+                            boxShadow: '0 1px 2px rgba(20, 19, 26, 0.04)',
+                            transition: 'all 0.15s ease'
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.backgroundColor = 'var(--action, #14131a)';
+                            e.currentTarget.style.color = '#ffffff';
+                            e.currentTarget.style.borderColor = 'var(--action, #14131a)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.backgroundColor = '#ffffff';
+                            e.currentTarget.style.color = 'var(--ink, #14131a)';
+                            e.currentTarget.style.borderColor = 'var(--border-subtle, #cbd5e1)';
+                          }}
+                        >
+                          <Eye size={13} strokeWidth={2.5} />
+                          View Ticket
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
