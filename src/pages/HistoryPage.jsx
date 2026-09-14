@@ -287,24 +287,34 @@ export default function HistoryPage({ records = [], onRefreshHistory }) {
                     <td style={{ padding: '12px 18px', textAlign: 'right' }}>
                       <button
                         onClick={() => setActiveRecordModal(item)}
-                        className="btn-tactile"
                         style={{
                           display: 'inline-flex',
                           alignItems: 'center',
-                          gap: '5px',
-                          padding: '5px 12px',
-                          borderRadius: 'var(--radius)',
+                          gap: '6px',
+                          padding: '5px 13px',
+                          borderRadius: '7px',
                           background: '#ffffff',
-                          border: '1.5px solid #cbd5e1',
-                          color: '#0f172a',
+                          border: '1px solid var(--border-subtle, #cbd5e1)',
+                          color: 'var(--ink, #14131a)',
                           fontSize: '0.78rem',
                           fontWeight: 700,
                           cursor: 'pointer',
-                          boxShadow: '0 1px 2px rgba(20, 19, 26, 0.05)'
+                          boxShadow: '0 1px 2px rgba(20, 19, 26, 0.04)',
+                          transition: 'all 0.15s ease'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = 'var(--action, #14131a)';
+                          e.currentTarget.style.color = '#ffffff';
+                          e.currentTarget.style.borderColor = 'var(--action, #14131a)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = '#ffffff';
+                          e.currentTarget.style.color = 'var(--ink, #14131a)';
+                          e.currentTarget.style.borderColor = 'var(--border-subtle, #cbd5e1)';
                         }}
                       >
                         <Eye size={13} strokeWidth={2.5} />
-                        View
+                        View Ticket
                       </button>
                     </td>
                   </tr>
